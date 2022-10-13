@@ -61,6 +61,12 @@ pub struct AddressUtxo {
     pub amount: Vec<Amount>,
     /// Block number of the UTXO.
     pub block: String,
+    /// The hash of the transaction output datum
+    pub data_hash: Option<String>,
+    ///CBOR encoded inline datum
+    pub inline_datum: Option<String>,
+    ///The hash of the reference script of the output
+    pub reference_script_hash: Option<String>,
 }
 
 /// Created by [`addresses_transactions`](BlockFrostApi::addresses_transactions) method.
