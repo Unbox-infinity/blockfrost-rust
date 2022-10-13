@@ -33,6 +33,33 @@ impl BlockFrostApi {
         Ok(json_from(&text).map_err(|reason| json_error(url, text, reason))?)
     }
 
+    /// Evaluates a transaction and returns estimated execution units via Ogmios.
+    ///
+    /// [`/utils/txs/evaluate`] https://docs.blockfrost.io/#tag/Cardano-Utilities/paths/~1utils~1txs~1evaluate/post
+    pub async fn transactions_evaluate(&self, transaction_data: Vec<u8>) -> crate::Result<String> {
+        //The body is passed to ogmios which expects it hex encoded.
+        let body = Body::from(hex::encode(transaction_data));
+        let content_type_header = ("Content-Type", HeaderValue::from_static("application/cbor"));
+
+        let endpoint_suffix = "/utils/txs/evaluate";
+        let Url(url) = Url::from_endpoint_without_parameters(&self.settings, endpoint_suffix);
+
+        let request = self
+            .client
+            .request(Method::POST, &url)
+            .header(content_type_header.0, content_type_header.1)
+            .body(body);
+
+        let (status, text) = send_request(request, self.settings.retry_settings)
+            .await
+            .map_err(|reason| Error::Reqwest { url: url.clone(), reason })?;
+
+        if !status.is_success() {
+            return Err(process_error_response(&text, status, &url));
+        }
+        Ok(text)
+    }
+
     endpoints! {
         /// Return content of the requested transaction.
         transaction_by_hash(hash: &str) -> Transaction => "/txs/{hash}";

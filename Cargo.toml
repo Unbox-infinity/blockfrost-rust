@@ -8,6 +8,7 @@ repository = "https://github.com/blockfrost/blockfrost-rust"
 homepage = "https://blockfrost.io"
 
 [dependencies]
+hex = "0.4"
 futures = "0.3.17"
 reqwest = { version = "0.11.4", features = ["multipart"] }
 serde = { version = "1.0.130", features = ["derive"] }
