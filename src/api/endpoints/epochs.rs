@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 
 use crate::*;
@@ -115,6 +117,8 @@ pub struct EpochParameters {
     pub min_pool_cost: String,
     /// Epoch number only used once.
     pub nonce: String,
+    /// Cost models parameters for Plutus Core scripts.
+    pub cost_models: Option<HashMap<String, HashMap<String, Integer>>>,
     /// The per word cost of script memory usage.
     pub price_mem: Option<Float>,
     /// The cost of script execution step usage.
@@ -135,7 +139,7 @@ pub struct EpochParameters {
     /// The maximum number of collateral inputs allowed in a transaction.
     pub max_collateral_inputs: Option<Integer>,
     /// The cost per UTxO word.
-    pub coins_per_utxo_word: Option<String>,
+    pub coins_per_utxo_size: Option<String>,
 }
 
 /// Created by [`epochs_stakes`](BlockFrostApi::epochs_stakes) method.
