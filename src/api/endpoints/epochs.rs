@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 use serde::{Deserialize, Serialize};
 
@@ -118,7 +118,7 @@ pub struct EpochParameters {
     /// Epoch number only used once.
     pub nonce: String,
     /// Cost models parameters for Plutus Core scripts.
-    pub cost_models: Option<HashMap<String, HashMap<String, Integer>>>,
+    pub cost_models: Option<BTreeMap<String, BTreeMap<String, Integer>>>,
     /// The per word cost of script memory usage.
     pub price_mem: Option<Float>,
     /// The cost of script execution step usage.
