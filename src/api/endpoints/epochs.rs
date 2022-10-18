@@ -98,11 +98,11 @@ pub struct EpochParameters {
     /// Desired number of pools.
     pub n_opt: Integer,
     /// Pool pledge influence.
-    pub a0: Float,
+    pub a0: String,
     /// Monetary expansion.
-    pub rho: Float,
+    pub rho: String,
     /// Treasury expansion.
-    pub tau: Float,
+    pub tau: String,
     /// Percentage of blocks produced by federated nodes
     pub decentralisation_param: Float,
     /// Seed for extra entropy.
@@ -120,9 +120,9 @@ pub struct EpochParameters {
     /// Cost models parameters for Plutus Core scripts.
     pub cost_models: Option<BTreeMap<String, BTreeMap<String, Integer>>>,
     /// The per word cost of script memory usage.
-    pub price_mem: Option<Float>,
+    pub price_mem: Option<String>,
     /// The cost of script execution step usage.
-    pub price_step: Option<Float>,
+    pub price_step: Option<String>,
     /// The maximum number of execution memory allowed to be used in a single transaction.
     pub max_tx_ex_mem: Option<String>,
     /// The maximum number of execution steps allowed to be used in a single transaction.
@@ -135,7 +135,7 @@ pub struct EpochParameters {
     pub max_val_size: Option<String>,
     /// The percentage of the transactions fee which must be provided as collateral when including
     /// non-native scripts.
-    pub collateral_percent: Option<Float>,
+    pub collateral_percent: Option<String>,
     /// The maximum number of collateral inputs allowed in a transaction.
     pub max_collateral_inputs: Option<Integer>,
     /// The cost per UTxO word.
